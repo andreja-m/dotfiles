@@ -1,0 +1,2 @@
+# rice
+awesome wm
