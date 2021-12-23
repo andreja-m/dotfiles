@@ -17,8 +17,8 @@ then
   sudo apt-get upgrade
   sudo apt-get install awesome arandr terminator wavemon
   aw
-  sudo mv rc.lua /home/$USER/.config/awesome
   mv deb.rc.lua rc.lua
+  sudo mv rc.lua /home/$USER/.config/awesome
 elif [ $INPUT -eq 2 ]
 then
   sudo pacman -Syyu
