@@ -7,4 +7,4 @@
 
 - vimrc = vim config for; set nu:
 
-- bashrc = credits ror terminal look goes to this man and repo: https://gist.github.com/rickdaalhuizen90/d1df7f6042494b982db559efc01d9557
+- bashrc = credits for terminal look goes to this man and repo: https://gist.github.com/rickdaalhuizen90/d1df7f6042494b982db559efc01d9557
