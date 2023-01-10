@@ -1,14 +1,27 @@
+" set tab to 4 spaces when entered
+set tabstop=4
+
+"Indent by 4 when shift + > or backwards
+set shiftwidth=4
+
+" better looking numbers
 set nu
 
+" Highlight the syntax
 syntax on
+syntax enable
 
+" Enable copy to system clipboard
 vnoremap <C-c> "+y
-map <C-v> "+P
+"map <C-v> "+P
 
 set clipboard=unnamedplus
 
-colorscheme evening 
+" VIM Them
+colorscheme desert
+set background=dark
 
+" This retarded numbers on the right
 set relativenumber
 
 " Auto indent by 4
@@ -26,30 +39,22 @@ set list
 set cursorcolumn
 set cursorline
 
-" Add this to your vimrc to get a minimalist autocomplete pop
-" Or use as a plugin : https://github.com/maxboisvert/vim-simple-complete
-
-" Minimalist-TabComplete-Plugin
-inoremap <expr> <Tab> TabComplete()
-fun! TabComplete()
-    if getline('.')[col('.') - 2] =~ '\K' || pumvisible()
-        return "\<C-P>"
-    else
-        return "\<Tab>"
-    endif
-endfun
-
 " Minimalist-AutoCompletePop-Plugin
 set completeopt=menu,menuone,noinsert
 inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 autocmd InsertCharPre * call AutoComplete()
 fun! AutoComplete()
     if v:char =~ '\K'
-        \ && getline('.')[col('.') - 4] !~ '\K'
-        \ && getline('.')[col('.') - 3] =~ '\K'
-        \ && getline('.')[col('.') - 2] =~ '\K' " last char
+        "\ && getline('.')[col('.') - 4] !~ '\K'
+        "\ && getline('.')[col('.') - 3] =~ '\K'
+        \ && getline('.')[col('.') - 2] !~ '\K' " last char
         \ && getline('.')[col('.') - 1] !~ '\K'
-
+        
         call feedkeys("\<C-P>", 'n')
     end
 endfun
+
+set completeopt+=noinsert
+
+"set completeopt=noinsert,noselect,menu,menuone,longest
+
