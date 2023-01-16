@@ -1,3 +1,8 @@
+" install vim-polyglot
+
+" highlight search
+set hlsearch
+
 " set tab to 4 spaces when entered
 set tabstop=4
 
@@ -29,7 +34,12 @@ set autoindent
 set expandtab
 
 " Shows status bar
-set laststatus=2
+"set laststatus=2
+"set statusline+=%f         " Path to the file
+"set statusline+=%=        " Switch to the right side
+"set statusline+=%l        " Current line
+"set statusline+=/         " Separator
+"set statusline+=%L        " Total linesne=%l
 
 " Shows on every 4th space  
 set listchars=multispace:┊\ \ \ 
@@ -57,4 +67,5 @@ endfun
 set completeopt+=noinsert
 
 "set completeopt=noinsert,noselect,menu,menuone,longest
+
 
