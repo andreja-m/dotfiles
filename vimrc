@@ -34,7 +34,7 @@ set autoindent
 set expandtab
 
 " Shows status bar
-"set laststatus=2
+set laststatus=2
 "set statusline+=%f         " Path to the file
 "set statusline+=%=        " Switch to the right side
 "set statusline+=%l        " Current line
