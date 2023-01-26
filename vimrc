@@ -54,7 +54,7 @@ highlight IsNotModified ctermbg=black ctermfg=green
 " Dynamic status line
 set statusline+=%#IsModified#%{&mod?expand('%'):''}%*%#IsNotModified#%{&mod?'':expand('%')}%*
 
-set statusline+=%F         " Path to the file
+set statusline+=\ %F         " Path to the file
 set statusline+=%=        " Switch to the right side
 set statusline+=%l        " Current line
 set statusline+=/         " Separator
