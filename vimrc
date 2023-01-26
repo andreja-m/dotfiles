@@ -1,5 +1,3 @@
-" install vim-polyglot
-
 " highlight search
 set hlsearch
 
@@ -35,12 +33,35 @@ set expandtab
 
 " Shows status bar
 set laststatus=2
-"set statusline+=%f         " Path to the file
-"set statusline+=%=        " Switch to the right side
-"set statusline+=%l        " Current line
-"set statusline+=/         " Separator
-"set statusline+=%L        " Total linesne=%l
 
+let g:currentmode={
+       \ 'n'  : 'NORMAL ',
+       \ 'v'  : 'VISUAL ',
+       \ 'V'  : 'V·Line ',
+       \ "\<C-V>" : 'V·Block ',
+       \ 'i'  : 'INSERT ',
+       \ 'R'  : 'R ',
+       \ 'Rv' : 'V·Replace ',
+       \ 'c'  : 'Command ',
+       \}
+
+set statusline+=\ %{toupper(g:currentmode[mode()])}
+
+" This is to know if file is saved or not
+highlight IsModified    ctermbg=red   ctermfg=blue
+highlight IsNotModified ctermbg=black ctermfg=green
+
+" Dynamic status line
+set statusline+=%#IsModified#%{&mod?expand('%'):''}%*%#IsNotModified#%{&mod?'':expand('%')}%*
+
+set statusline+=%F         " Path to the file
+set statusline+=%=        " Switch to the right side
+set statusline+=%l        " Current line
+set statusline+=/         " Separator
+set statusline+=%L        " Total linesne=%l
+set statusline+=\ --------->
+set statusline+=\ %P
+"set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 " Shows on every 4th space  
 set listchars=multispace:┊\ \ \ 
 set list
