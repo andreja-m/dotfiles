@@ -87,6 +87,8 @@ set statusline+=%L          " Total linesne=%l
 set statusline+=\ --------->
 set statusline+=\ %P
 "set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+set statusline+=\ %#Mode#\ %{toupper('DOOM')}
+set statusline+=%#Mode#\ %{toupper('')}
 
 " Shows on every 4th space
 set listchars=multispace:┊\ \ \ 
