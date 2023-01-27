@@ -37,32 +37,58 @@ set laststatus=2
 let g:currentmode={
        \ 'n'  : 'NORMAL ',
        \ 'v'  : 'VISUAL ',
-       \ 'V'  : 'V·Line ',
-       \ "\<C-V>" : 'V·Block ',
+       \ 'V'  : 'VISUAL·Line ',
+       \ "\<C-V>" : 'VISUAL·Block ',
        \ 'i'  : 'INSERT ',
        \ 'R'  : 'R ',
        \ 'Rv' : 'V·Replace ',
        \ 'c'  : 'Command ',
        \}
 
-set statusline+=\ %{toupper(g:currentmode[mode()])}
+"set statusline+=\ %{toupper(g:currentmode[mode()])}
+
+hi Mode cterm=bold ctermfg=black ctermbg=magenta
+set statusline+=
+set statusline+=%#Mode#\ %{toupper(g:currentmode[mode()])}
+
+" Define a function to get the current mode
+"function! GetCurrentMode()
+"  let l:mode = toupper(g:currentmode[mode()])
+"  if l:mode == "NORMAL"
+"    return "ctermfg=blue"
+"  elseif l:mode == "INSERT"
+"    return "ctermfg=green"
+"  elseif l:mode == "VISUAL"
+"    return "ctermfg=purple"
+"  else
+"    return ""
+"  endif
+"endfunction
+"
+"" Add the current mode to the statusline
+"set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+"setlocal statusline+=%#{GetCurrentMode()}%t {GetCurrentMode()}
+
 
 " This is to know if file is saved or not
-highlight IsModified    ctermbg=red   ctermfg=blue
+highlight IsModified    ctermbg=red   ctermfg=white
 highlight IsNotModified ctermbg=black ctermfg=green
 
 " Dynamic status line
 set statusline+=%#IsModified#%{&mod?expand('%'):''}%*%#IsNotModified#%{&mod?'':expand('%')}%*
+"               \______________ Part A _____________/\______________ Part B ________________/
 
-set statusline+=\ %F         " Path to the file
-set statusline+=%=        " Switch to the right side
-set statusline+=%l        " Current line
-set statusline+=/         " Separator
-set statusline+=%L        " Total linesne=%l
+set statusline+=\ %F        " Path to the file
+set statusline+=%=          " Switch to the right side
+set statusline+=\Col:       " Just sets 'Col:' string
+set statusline+=\ %l        " Current line
+set statusline+=/           " Separator
+set statusline+=%L          " Total linesne=%l
 set statusline+=\ --------->
 set statusline+=\ %P
 "set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-" Shows on every 4th space  
+
+" Shows on every 4th space
 set listchars=multispace:┊\ \ \ 
 set list
 
