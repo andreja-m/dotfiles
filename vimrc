@@ -34,41 +34,87 @@ set expandtab
 " Shows status bar
 set laststatus=2
 
-let g:currentmode={
-       \ 'n'  : 'NORMAL ',
-       \ 'v'  : 'VISUAL ',
-       \ 'V'  : 'VISUAL·Line ',
-       \ "\<C-V>" : 'VISUAL·Block ',
-       \ 'i'  : 'INSERT ',
-       \ 'R'  : 'R ',
-       \ 'Rv' : 'V·Replace ',
-       \ 'c'  : 'Command ',
-       \}
+hi StatusLine           ctermfg=253         ctermbg=233         cterm=bold
+hi StatusLineNormal     ctermfg=251         ctermbg=darkblue          cterm=bold
+hi StatusLineInsert     ctermfg=green         ctermbg=darkgray          cterm=bold
+hi StatusLineReplace    ctermfg=251         ctermbg=88          cterm=bold
+hi StatusLineVisual     ctermfg=0         ctermbg=magenta         cterm=bold
+hi StatusLineVisualL    ctermfg=0         ctermbg=magenta     cterm=bold
+hi StatusLineVisualB    ctermfg=0         ctermbg=magenta     cterm=bold
+hi StatusLineCommand    ctermfg=green         ctermbg=0           cterm=bold
+hi StatusLineSelect     ctermfg=251         ctermbg=130         cterm=bold
+hi StatusLineSelectL    ctermfg=251         ctermbg=130         cterm=bold
+hi StatusLineSelectB    ctermfg=251         ctermbg=130         cterm=bold
+hi StatusLineTerminal   ctermfg=251         ctermbg=22          cterm=bold
 
-"set statusline+=\ %{toupper(g:currentmode[mode()])}
+let s:statusline_modes_dict = {
+    \ 'n' : {
+        \ 'text'        : 'NORMAL',
+        \ 'color_group' : 'StatusLineNormal'
+    \ },
+    \ 'i' : {
+        \ 'text'        : 'INSERT',
+        \ 'color_group' : 'StatusLineInsert'
+    \ },
+    \ 'R' : {
+        \ 'text'        : 'REPLACE',
+        \ 'color_group' : 'StatusLineReplace'
+    \ },
+    \ 'v' : {
+        \ 'text'        : 'VISUAL',
+        \ 'color_group' : 'StatusLineVisual'
+    \ },
+    \ 'V' : {
+        \ 'text'        : 'V·LINE',
+        \ 'color_group' : 'StatusLineVisualL'
+    \ },
+    \ "\<C-v>" : {
+        \ 'text'        : 'VISUAL·BLOCK',
+        \ 'color_group' : 'StatusLineVisualB'
+    \ },
+    \ 'c' : {
+        \ 'text'        : 'COMMAND',
+        \ 'color_group' : 'StatusLineCommand'
+    \ },
+    \ 's' : {
+        \ 'text'        : 'SELECT',
+        \ 'color_group' : 'StatusLineSelect'
+    \ },
+    \ 'S' : {
+        \ 'text'        : 'S·LINE',
+        \ 'color_group' : 'StatusLineSelectL'
+    \ },
+    \ "\<C-s>" : {
+        \ 'text'        : 'S·BLOCK',
+        \ 'color_group' : 'StatusLineSelectB'
+    \ },
+    \ 't' : {
+        \ 'text'        : 'TERMINAL',
+        \ 'color_group' : 'StatusLineTerminal'
+    \ },
+\ }
 
-hi Mode cterm=bold ctermfg=black ctermbg=magenta
-set statusline+=
-set statusline+=%#Mode#\ %{toupper(g:currentmode[mode()])}
+function Get_current_mode_text ()
+    let md = mode()
+    if (has_key (s:statusline_modes_dict, md))
+        return s:statusline_modes_dict[md]['text']
+    endif
+    return md
+endfunction
 
-" Define a function to get the current mode
-"function! GetCurrentMode()
-"  let l:mode = toupper(g:currentmode[mode()])
-"  if l:mode == "NORMAL"
-"    return "ctermfg=blue"
-"  elseif l:mode == "INSERT"
-"    return "ctermfg=green"
-"  elseif l:mode == "VISUAL"
-"    return "ctermfg=purple"
-"  else
-"    return ""
-"  endif
-"endfunction
-"
-"" Add the current mode to the statusline
-"set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-"setlocal statusline+=%#{GetCurrentMode()}%t {GetCurrentMode()}
+function Get_current_mode_color_group ()
+    let md = mode()
+    if (has_key (s:statusline_modes_dict, md))
+        return "%#" . s:statusline_modes_dict[md]['color_group'] . "#"
+    endif
+    return "%#StatusLine#"
+endfunction
 
+" left
+"set statusline=
+set statusline+=%{%Get_current_mode_color_group()%}\ 
+set statusline+=%{Get_current_mode_text()}\ 
+set statusline+=%#Statusline# 
 
 " This is to know if file is saved or not
 highlight IsModified    ctermbg=red   ctermfg=white
@@ -87,8 +133,8 @@ set statusline+=%L          " Total linesne=%l
 set statusline+=\ --------->
 set statusline+=\ %P
 "set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-set statusline+=\ %#Mode#\ %{toupper('DOOM')}
-set statusline+=%#Mode#\ %{toupper('')}
+"set statusline+=\ %#mode()#\ %{toupper('DOOM')}
+"set statusline+=%#mode()#\ %{toupper('')}
 
 " Shows on every 4th space
 set listchars=multispace:┊\ \ \ 
@@ -116,5 +162,6 @@ endfun
 set completeopt+=noinsert
 
 "set completeopt=noinsert,noselect,menu,menuone,longest
+
 
 
