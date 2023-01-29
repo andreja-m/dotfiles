@@ -121,7 +121,7 @@ highlight IsModified    ctermbg=red   ctermfg=white
 highlight IsNotModified ctermbg=black ctermfg=green
 
 " Dynamic status line
-set statusline+=%#IsModified#%{&mod?expand('%'):''}%*%#IsNotModified#%{&mod?'':expand('%')}%*
+set statusline+=\ %#IsModified#%{&mod?expand('%'):''}%*%#IsNotModified#%{&mod?'':expand('%')}%*
 "               \______________ Part A _____________/\______________ Part B ________________/
 
 set statusline+=\ %F        " Path to the file
