@@ -1,3 +1,8 @@
+" install polyglot!!!
+"
+let &makeprg = 'matmake2 -t gcc-debug'
+
+
 " highlight search
 set hlsearch
 
@@ -149,6 +154,7 @@ set statusline+=\ %P\
 "set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
 set statusline+=%{%Get_current_mode_color_group()%}\ DOOM 
+"set statusline+=%{%Get_current_mode_color_group()%}\ (>^.^<)
 set statusline+=\ 
 
 " Shows on every 4th space
@@ -177,7 +183,4 @@ endfun
 set completeopt+=noinsert
 
 "set completeopt=noinsert,noselect,menu,menuone,longest
-
-
-
 
