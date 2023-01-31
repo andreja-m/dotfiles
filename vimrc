@@ -14,6 +14,9 @@ set nu
 syntax on
 syntax enable
 
+" Ruler
+"set colorcolumn=72
+
 " Enable copy to system clipboard
 vnoremap <C-c> "+y
 "map <C-v> "+P
@@ -35,13 +38,13 @@ set expandtab
 set laststatus=2
 
 hi StatusLine           ctermfg=253         ctermbg=233         cterm=bold
-hi StatusLineNormal     ctermfg=251         ctermbg=darkblue          cterm=bold
-hi StatusLineInsert     ctermfg=green         ctermbg=darkgray          cterm=bold
+hi StatusLineNormal     ctermfg=251         ctermbg=darkblue    cterm=bold
+hi StatusLineInsert     ctermfg=green       ctermbg=darkgray    cterm=bold
 hi StatusLineReplace    ctermfg=251         ctermbg=88          cterm=bold
-hi StatusLineVisual     ctermfg=0         ctermbg=magenta         cterm=bold
-hi StatusLineVisualL    ctermfg=0         ctermbg=magenta     cterm=bold
-hi StatusLineVisualB    ctermfg=0         ctermbg=magenta     cterm=bold
-hi StatusLineCommand    ctermfg=green         ctermbg=0           cterm=bold
+hi StatusLineVisual     ctermfg=0           ctermbg=magenta     cterm=bold
+hi StatusLineVisualL    ctermfg=0           ctermbg=magenta     cterm=bold
+hi StatusLineVisualB    ctermfg=0           ctermbg=magenta     cterm=bold
+hi StatusLineCommand    ctermfg=green       ctermbg=0           cterm=bold
 hi StatusLineSelect     ctermfg=251         ctermbg=130         cterm=bold
 hi StatusLineSelectL    ctermfg=251         ctermbg=130         cterm=bold
 hi StatusLineSelectB    ctermfg=251         ctermbg=130         cterm=bold
@@ -108,6 +111,7 @@ function Get_current_mode_color_group ()
         return "%#" . s:statusline_modes_dict[md]['color_group'] . "#"
     endif
     return "%#StatusLine#"
+    return "%DOOM#"
 endfunction
 
 " left
@@ -126,15 +130,26 @@ set statusline+=\ %#IsModified#%{&mod?expand('%'):''}%*%#IsNotModified#%{&mod?''
 
 set statusline+=\ %F        " Path to the file
 set statusline+=%=          " Switch to the right side
-set statusline+=\Col:       " Just sets 'Col:' string
+set statusline+=\ Size:
+set statusline+=\ %{\ line2byte(line(\"$\")+1)-1\ }\ B
+set statusline+=\ 
+"hi statusline ctermbg=white
+hi VisualColor ctermbg=darkgrey ctermfg=white 
+set statusline+=%#VisualColor#%{(mode()=='v')?'':''}
+set statusline+=\ Row:      " Just sets 'Col:' string
 set statusline+=\ %l        " Current line
 set statusline+=/           " Separator
 set statusline+=%L          " Total linesne=%l
-set statusline+=\ --------->
-set statusline+=\ %P
+set statusline+=- 
+set statusline+=%v
+set statusline+=\ --->
+set statusline+=\ %P\ 
+
+" default statusline
 "set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-"set statusline+=\ %#mode()#\ %{toupper('DOOM')}
-"set statusline+=%#mode()#\ %{toupper('')}
+
+set statusline+=%{%Get_current_mode_color_group()%}\ DOOM 
+set statusline+=\ 
 
 " Shows on every 4th space
 set listchars=multispace:┊\ \ \ 
@@ -162,6 +177,7 @@ endfun
 set completeopt+=noinsert
 
 "set completeopt=noinsert,noselect,menu,menuone,longest
+
 
 
 
