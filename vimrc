@@ -1,5 +1,6 @@
 " install polyglot!!!
-"
+" git clone --depth 1 https://github.com/sheerun/vim-polyglot ~/.vim/pack/plugins/start/vim-polyglot
+
 let &makeprg = 'matmake2 -t gcc-debug'
 
 
@@ -28,7 +29,7 @@ vnoremap <C-c> "+y
 
 set clipboard=unnamedplus
 
-" VIM Them
+" VIM Theme
 colorscheme desert
 set background=dark
 
@@ -116,7 +117,6 @@ function Get_current_mode_color_group ()
         return "%#" . s:statusline_modes_dict[md]['color_group'] . "#"
     endif
     return "%#StatusLine#"
-    return "%DOOM#"
 endfunction
 
 " left
@@ -126,35 +126,38 @@ set statusline+=%{Get_current_mode_text()}\
 set statusline+=%#Statusline# 
 
 " This is to know if file is saved or not
-highlight IsModified    ctermbg=red   ctermfg=white
+highlight IsModified    ctermbg=red   ctermfg=yellow
 highlight IsNotModified ctermbg=black ctermfg=green
 
 " Dynamic status line
-set statusline+=%#IsModified#%{&mod?expand('%'):''}%*%#IsNotModified#%{&mod?'':expand('%')}%*
+set statusline+=\ %#IsModified#%{&mod?expand('[-]'):''}%*%#IsNotModified#%{&mod?'':expand('[+]')}%*
 "               \______________ Part A _____________/\______________ Part B ________________/
 
-set statusline+=%F        " Path to the file
+set statusline+=\ $PATH:%F        " Path to the file
 set statusline+=%=          " Switch to the right side
-set statusline+=\ Size:
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}\ 
+hi Visual ctermbg=darkgreen ctermfg=white term=bold
+set statusline+=%#Visual#%{(mode()=='v')?'':''}
+set statusline+=\ Σ\ =
 set statusline+=\ %{\ line2byte(line(\"$\")+1)-1\ }\ B
 set statusline+=\ 
 "hi statusline ctermbg=white
 hi VisualColor ctermbg=darkgrey ctermfg=white 
 set statusline+=%#VisualColor#%{(mode()=='v')?'':''}
-set statusline+=\ Row:      " Just sets 'Col:' string
+set statusline+=\ ☰      " Just sets 'Col:' string
 set statusline+=\ %l        " Current line
-set statusline+=/           " Separator
+set statusline+=:           " Separator
 set statusline+=%L          " Total linesne=%l
 set statusline+=- 
 set statusline+=%v
-set statusline+=\ --->
+set statusline+=\ ⮀
 set statusline+=\ %P\ 
 
 " default statusline
 "set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
-set statusline+=%{%Get_current_mode_color_group()%}\ DOOM 
-"set statusline+=%{%Get_current_mode_color_group()%}\ (>^.^<)
+"set statusline+=%{%Get_current_mode_color_group()%}\ DOOM 
+set statusline+=%{%Get_current_mode_color_group()%}\ (>^.^<)
 set statusline+=\ 
 
 " Shows on every 4th space
@@ -183,4 +186,17 @@ endfun
 set completeopt+=noinsert
 
 "set completeopt=noinsert,noselect,menu,menuone,longest
+
+let python_highlight_all = 1
+
+set shell=/usr/bin/bash
+
+
+"sign define MyWarningSign text=! linehl=ErrorMsg
+"sign place 123 line=1 name=MyWarningSign
+
+"term python -m pudb %
+"
+"autocmd BufWinEnter *.py nmap <silent> <F5>:w<CR>:terminal python3 -m pdb '%:p'<CR>
+
 
