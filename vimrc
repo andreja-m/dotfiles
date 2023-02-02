@@ -126,11 +126,11 @@ set statusline+=%{Get_current_mode_text()}\
 set statusline+=%#Statusline# 
 
 " This is to know if file is saved or not
-highlight IsModified    ctermbg=red   ctermfg=yellow
+highlight IsModified    ctermbg=red   ctermfg=black
 highlight IsNotModified ctermbg=black ctermfg=green
 
 " Dynamic status line
-set statusline+=\ %#IsModified#%{&mod?expand('[-]'):''}%*%#IsNotModified#%{&mod?'':expand('[+]')}%*
+set statusline+=%#IsModified#%{&mod?expand('\ ✘\ '):''}%*%#IsNotModified#%{&mod?'':expand('\ ✓\ ')}%*
 "               \______________ Part A _____________/\______________ Part B ________________/
 
 set statusline+=\ $PATH:%F        " Path to the file
