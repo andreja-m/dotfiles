@@ -19,6 +19,8 @@ let g:airline_theme='bubblegum'
 nnoremap <F9> :NERDTree<CR>
 nnoremap <F10> :NERDTreeClose<CR>
 nnoremap <F2> :FZF <CR>
+nnoremap <C-j> :bprev <CR>
+nnoremap <C-k> :bnext <CR>
 
 
 vnoremap <C-c> +y
