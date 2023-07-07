@@ -1,6 +1,6 @@
 " install polyglot!!!
 " git clone --depth 1 https://github.com/sheerun/vim-polyglot ~/.vim/pack/plugins/start/vim-polyglot
-
+:set makeprg=gcc\ -Wall\ %
 let &makeprg = 'matmake2 -t gcc-debug'
 
 
@@ -24,6 +24,9 @@ syntax enable
 "set colorcolumn=72
 
 " Enable copy to system clipboard
+map <F2> :FZF <CR>
+map <F5> :w <CR>
+map <F12> :q <CR>
 vnoremap <C-c> "+y
 "map <C-v> "+P
 
@@ -40,8 +43,14 @@ set relativenumber
 set autoindent
 set expandtab
 
+"set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+set term=xterm-256color
+set termencoding=utf-8
+set guifont=Ubuntu\ Mono\ derivative\ Powerline:10
+
 " Shows status bar
 set laststatus=2
+
 
 hi StatusLine           ctermfg=253         ctermbg=233         cterm=bold
 hi StatusLineNormal     ctermfg=251         ctermbg=darkblue    cterm=bold
