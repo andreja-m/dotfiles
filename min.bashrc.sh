@@ -20,6 +20,12 @@ alias p='python'
 alias cp='rsync --progress'
 alias nv='nvim'
 
+# fzf sa horizonatalnom podelom
+alias dai='fzf --preview "batcat --style=numbers --color=always --line-range :500 {}" --preview-window=up:50%:wrap --bind "enter:execute(nvim {})"'
+
+# fzf sa vertikalnom podelom
+alias daj='fzf --preview "batcat --style=numbers --color=always --line-range :500 {}" --bind "enter:execute(nvim {})"'
+
 # default editor
 export VISUAL=vim;
 export EDITOR=vim;
