@@ -7,6 +7,9 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
+-- Map to <Leader>y (you can change it to your preference)
+vim.api.nvim_set_keymap('n', '<Leader>y', [[:w !xclip -selection clipboard<CR>]], { noremap = true, silent = true })
+
 require('packer').startup(function(use)
   -- Package manager
   use 'wbthomason/packer.nvim'
