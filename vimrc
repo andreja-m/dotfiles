@@ -50,7 +50,8 @@ set guifont=Ubuntu\ Mono\ derivative\ Powerline:10
 
 " Shows status bar
 set laststatus=2
-
+" For Windows vim, or if retarded on ubuntu
+set statusline=
 
 hi StatusLine           ctermfg=253         ctermbg=233         cterm=bold
 hi StatusLineNormal     ctermfg=251         ctermbg=darkblue    cterm=bold
